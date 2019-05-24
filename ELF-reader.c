@@ -169,7 +169,6 @@ void print_usage()
 	puts(" -h --file-header       Display the ELF file header");
 	puts(" -S --section-headers   Display the sections' header");
 	puts(" -s --symbols           Display the symbol table");
-
 }
 
 // procedures for each ELF-reader options
@@ -294,7 +293,7 @@ int display_section_headers()
 
 	// type string table
 	static char *sh_types[SHT_NUM] = {"NULL", "PROGBITS", "SYMTAB", "STRTAB", "RELA", "HASH",
-		"DYNAMIC", "NOTE", "NOBITS", "REL", "SHLIB", "DYNSYM", "NULL", "NULL", "INI_ARRAY", 
+		"DYNAMIC", "NOTE", "NOBITS", "REL", "SHLIB", "DYNSYM", "NULL", "NULL", "INIT_ARRAY", 
 		"FINI_ARRAY", "PREINIT_ARRAY", "GROUP", "SYMTAB_SHNDX"};
 
 	// flag characters set
@@ -319,7 +318,7 @@ int display_section_headers()
 		Elf32_Shdr *sh = sh_base + i;
 
 		const char *name = str_table + sh->sh_name;
-		const char *type = sh_types[sh->sh_type];
+		const char *type = sh->sh_type < SHT_NUM ? sh_types[sh->sh_type] : "???"; //TODO support other section header type
 		unsigned int addr = sh->sh_addr;
 		unsigned int off = sh->sh_offset;
 		unsigned int size = sh->sh_size;
@@ -378,8 +377,9 @@ int display_symbol_table()
 	// get symbol table 
 	for(int i = 0; i < eh->e_shnum; i ++) {
 		Elf32_Shdr *sh = sh_base + i;
-		if (sh->sh_type & SHT_SYMTAB) {
+		if (sh->sh_type == SHT_SYMTAB) {
 			sym_sh = sh;
+			printf("got symtab with idx: %d \n", i);
 			break;
 		}
 	}
