@@ -1,16 +1,21 @@
 
-CFLAGS = -Wall -g
+CC = gcc
+
 SRC = ELF-reader.c
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
+LIB = m 	# libmath
 TESTFILE = SimpleSection.o 
 TARGET = ELF-reader
+
+CFLAGS = -Wall -g 
+LDFLAGS = $(patsubst %, -l%, $(LIB))
 
 default: all
 
 all: $(TARGET) $(TESTFILE)
 
 ELF-reader: $(OBJECTS)
-	$(CC) -o $@ $(OBJECTS)
+	$(CC) -o $@ $(OBJECTS) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJECTS)
