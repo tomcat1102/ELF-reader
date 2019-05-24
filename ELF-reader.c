@@ -168,7 +168,8 @@ void print_usage()
 	puts(" Options are:");
 	puts(" -h --file-header       Display the ELF file header");
 	puts(" -S --section-headers   Display the sections' header");
-	
+	puts(" -s --symbols           Display the symbol table");
+
 }
 
 // procedures for each ELF-reader options
