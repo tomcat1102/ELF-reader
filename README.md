@@ -1,8 +1,8 @@
-# ELF-reader
-A simple utility that reads an ELF format file. 
+# ELF-reader (No longer under development)
+A simple utility that reads an ELF format file.  
 
 # Background
-It functions like linux utility 'readelf' but has much less functionalities, because it's still under development.
+It functions like linux utility 'readelf' but has much less functionalities, because it's still under development. However I probably won't be developing it cause it pays little to do so and now I'm deeply invovled in project ArenaOS and won't have much time to improve it.
 I wrote this to learn the ELF format and gain some knowledge about program linking, loading and some others.
 And I recommend the book 《程序员的自我修养——链接、装载与库》 by　潘爱民 if you are interested in how program works under the hood.
 
